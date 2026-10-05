@@ -1,0 +1,6 @@
+{
+  "name": "Apoie o Canal do Leigo - Manutenção de PS5",
+  "description": "Página oficial de doação para apoiar as ferramentas e tutoriais de manutenção e cuidados com o PS5 do Canal do Leigo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
