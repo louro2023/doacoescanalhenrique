@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ExternalLink, Copy, Check, Heart, Wrench, Shield, Coffee, Cpu, Crown } from 'lucide-react';
+import { Copy, Check, Heart, Wrench, Shield, Coffee, Cpu, Crown, QrCode } from 'lucide-react';
+import { QRCodeModal } from './components/QRCodeModal';
 
 interface Tier {
   id: string;
@@ -43,6 +44,7 @@ const TIERS: Tier[] = [
 
 export default function App() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
 
   const handleCopy = (url: string, id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,6 +52,10 @@ export default function App() {
     navigator.clipboard.writeText(url);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2500);
+  };
+
+  const handleOpenQR = (tier: Tier) => {
+    setSelectedTier(tier);
   };
 
   return (
@@ -154,22 +160,21 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Action Buttons */}
+                {/* Action Buttons: Clicks open QR Code modal directly without opening new page */}
                 <div className="mt-6 space-y-2 pt-4 border-t border-slate-800/80">
-                  <a
-                    href={tier.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-center flex items-center justify-center gap-2 transition-all bg-[#0070d1] hover:bg-[#005fb3] text-white shadow-[0_0_15px_rgba(0,112,209,0.3)] hover:shadow-[0_0_22px_rgba(0,229,255,0.5)]"
+                  <button
+                    type="button"
+                    onClick={() => handleOpenQR(tier)}
+                    className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-center flex items-center justify-center gap-2 transition-all bg-[#0070d1] hover:bg-[#005fb3] text-white shadow-[0_0_15px_rgba(0,112,209,0.3)] hover:shadow-[0_0_22px_rgba(0,229,255,0.5)] cursor-pointer"
                   >
+                    <QrCode className="w-4 h-4 shrink-0" />
                     <span>Apoiar {tier.name}</span>
-                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
-                  </a>
+                  </button>
 
                   <button
                     type="button"
                     onClick={(e) => handleCopy(tier.url, tier.id, e)}
-                    className="w-full py-2 px-3 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800/40 hover:bg-slate-800 border border-slate-800 transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full py-2 px-3 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800/40 hover:bg-slate-800 border border-slate-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     {copiedId === tier.id ? (
                       <>
@@ -193,10 +198,10 @@ export default function App() {
         <div className="mt-10 text-center max-w-lg mx-auto space-y-2">
           <div className="inline-flex items-center gap-1.5 text-xs text-slate-400">
             <Shield className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Cobrança oficial e segura gerada diretamente pelo Nubank.</span>
+            <span>Ao clicar em apoiar, o QR Code de cobrança é gerado na tela.</span>
           </div>
           <p className="text-xs text-slate-400">
-            Você pode pagar por Pix com qualquer banco ou pelo próprio app do Nubank.
+            Pague pelo Pix com qualquer banco ou pelo aplicativo do Nubank.
           </p>
         </div>
 
@@ -213,6 +218,13 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      {/* QR Code Modal: Displays directly on screen without leaving page */}
+      <QRCodeModal
+        isOpen={Boolean(selectedTier)}
+        onClose={() => setSelectedTier(null)}
+        tier={selectedTier}
+      />
 
     </div>
   );
