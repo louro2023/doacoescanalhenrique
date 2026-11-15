@@ -229,10 +229,10 @@ export const DonationTiers: React.FC = () => {
               <a
                 href={
                   selectedSimValue === 2
-                    ? 'https://nubank.com.br/cobrar/3a4h2/6ac3abb7-271e-43cb-8da3-c2c1ef1e42d7'
+                    ? 'https://nubank.com.br/cobrar/3a4h2/6af910c6-5306-4b3f-a6d7-c1eadf6e9b07'
                     : selectedSimValue === 5
-                    ? 'https://nubank.com.br/cobrar/3a4h2/6ac3a284-c7d1-419a-8d8c-17364a2251c7'
-                    : 'https://nubank.com.br/cobrar/3a4h2/6ac1eb8d-5603-425a-9724-34655040d351'
+                    ? 'https://nubank.com.br/cobrar/3a4h2/6af910ab-7c83-411c-809f-dda7d845b1d8'
+                    : 'https://nubank.com.br/cobrar/3a4h2/6af910fc-e7bb-4f3b-a8ba-877a06cdbb81'
                 }
                 target="_blank"
                 rel="noopener noreferrer"

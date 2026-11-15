@@ -18,7 +18,7 @@ export const DONATION_TIERS: DonationTier[] = [
     valueNumeric: 2,
     title: 'O Cafezinho do Técnico',
     subtitle: 'Uma forcinha rápida que faz toda a diferença para o canal continuar gravando.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac3abb7-271e-43cb-8da3-c2c1ef1e42d7',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910c6-5306-4b3f-a6d7-c1eadf6e9b07',
     impact: 'Ajuda nos insumos descartáveis: cotonetes antiestáticos, luvas nitrílicas e papel térmico.',
     toolsBought: ['Kit de hastes flexíveis de precisão', 'Luvas de nitrilo antiestáticas', 'Fita isolante térmica']
   },
@@ -28,7 +28,7 @@ export const DONATION_TIERS: DonationTier[] = [
     valueNumeric: 5,
     title: 'Doutor do PS5',
     subtitle: 'O valor campeão! Equivale a uma coxinha, mas salva o console de milhares de pessoas.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac3a284-c7d1-419a-8d8c-17364a2251c7',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910ab-7c83-411c-809f-dda7d845b1d8',
     popular: true,
     impact: 'Ajuda na compra de metal líquido de alta condutividade, thermal pads e brocas Torx T8.',
     toolsBought: ['Seringa de metal líquido Thermal Grizzly', 'Thermal pads para memórias GDDR6', 'Álcool isopropílico 99,8%']
@@ -38,7 +38,7 @@ export const DONATION_TIERS: DonationTier[] = [
     amountLabel: 'Qualquer Valor',
     title: 'Patrão da Bancada',
     subtitle: 'Você define a quantia que cabe no seu bolso para apoiar o laboratório.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac1eb8d-5603-425a-9724-34655040d351',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910fc-e7bb-4f3b-a8ba-877a06cdbb81',
     impact: 'Financia equipamentos pesados: estação de solda, microscópio HDMI e placas para testes destrutivos.',
     toolsBought: ['Estação de retrabalho SMD para HDMI', 'Microscópio digital para trilhas finas', 'Fontes e coolers para testes']
   }

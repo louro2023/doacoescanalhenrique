@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Heart, Wrench, Shield, Coffee, Cpu, Crown, QrCode } from 'lucide-react';
-import { QRCodeModal } from './components/QRCodeModal';
+import { ExternalLink, Copy, Check, Heart, Wrench, Shield, Coffee, Cpu, Crown } from 'lucide-react';
 
 interface Tier {
   id: string;
@@ -19,7 +18,7 @@ const TIERS: Tier[] = [
     amount: 'R$ 2,00',
     subtitle: 'Apoio Básico',
     description: 'Ajuda nos insumos do dia a dia, como luvas de nitrilo e álcool isopropílico para limpeza.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac3abb7-271e-43cb-8da3-c2c1ef1e42d7',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910c6-5306-4b3f-a6d7-c1eadf6e9b07',
     icon: Coffee,
   },
   {
@@ -28,7 +27,7 @@ const TIERS: Tier[] = [
     amount: 'R$ 5,00',
     subtitle: 'Apoio Essencial',
     description: 'Ajuda na compra de seringas de metal líquido de alta qualidade e novas chaves de segurança.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac3a284-c7d1-419a-8d8c-17364a2251c7',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910ab-7c83-411c-809f-dda7d845b1d8',
     icon: Cpu,
   },
   {
@@ -37,14 +36,13 @@ const TIERS: Tier[] = [
     amount: 'Qualquer Valor',
     subtitle: 'Apoio Livre',
     description: 'Você escolhe a quantia que quiser para fortalecer os equipamentos e testes do laboratório.',
-    url: 'https://nubank.com.br/cobrar/3a4h2/6ac1eb8d-5603-425a-9724-34655040d351',
+    url: 'https://nubank.com.br/cobrar/3a4h2/6af910fc-e7bb-4f3b-a8ba-877a06cdbb81',
     icon: Crown,
   },
 ];
 
 export default function App() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
 
   const handleCopy = (url: string, id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -52,10 +50,6 @@ export default function App() {
     navigator.clipboard.writeText(url);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2500);
-  };
-
-  const handleOpenQR = (tier: Tier) => {
-    setSelectedTier(tier);
   };
 
   return (
@@ -123,7 +117,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 3 Donation Cards with heavy emphasis on the names */}
+        {/* 3 Donation Cards with heavy emphasis on the names and direct payment links */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto w-full">
           {TIERS.map((tier) => {
             const Icon = tier.icon;
@@ -160,30 +154,31 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Action Buttons: Clicks open QR Code modal directly without opening new page */}
+                {/* Action Buttons: Opens Nubank/Pix payment page directly in new tab */}
                 <div className="mt-6 space-y-2 pt-4 border-t border-slate-800/80">
-                  <button
-                    type="button"
-                    onClick={() => handleOpenQR(tier)}
-                    className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-center flex items-center justify-center gap-2 transition-all bg-[#0070d1] hover:bg-[#005fb3] text-white shadow-[0_0_15px_rgba(0,112,209,0.3)] hover:shadow-[0_0_22px_rgba(0,229,255,0.5)] cursor-pointer"
+                  <a
+                    href={tier.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-center flex items-center justify-center gap-2 transition-all bg-[#0070d1] hover:bg-[#005fb3] text-white shadow-[0_0_15px_rgba(0,112,209,0.3)] hover:shadow-[0_0_22px_rgba(0,229,255,0.5)] whitespace-nowrap"
                   >
-                    <QrCode className="w-4 h-4 shrink-0" />
                     <span>Apoiar {tier.name}</span>
-                  </button>
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  </a>
 
                   <button
                     type="button"
                     onClick={(e) => handleCopy(tier.url, tier.id, e)}
-                    className="w-full py-2 px-3 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800/40 hover:bg-slate-800 border border-slate-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-2 px-3 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800/40 hover:bg-slate-800 border border-slate-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
                   >
                     {copiedId === tier.id ? (
                       <>
-                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                         <span className="text-emerald-400 font-mono">Link Copiado!</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-3.5 h-3.5" />
+                        <Copy className="w-3.5 h-3.5 shrink-0" />
                         <span>Copiar link do Nubank</span>
                       </>
                     )}
@@ -198,10 +193,10 @@ export default function App() {
         <div className="mt-10 text-center max-w-lg mx-auto space-y-2">
           <div className="inline-flex items-center gap-1.5 text-xs text-slate-400">
             <Shield className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Ao clicar em apoiar, o QR Code de cobrança é gerado na tela.</span>
+            <span>Cobrança oficial e segura gerada diretamente pelo Nubank.</span>
           </div>
           <p className="text-xs text-slate-400">
-            Pague pelo Pix com qualquer banco ou pelo aplicativo do Nubank.
+            Você pode pagar por Pix com qualquer banco ou pelo próprio app do Nubank.
           </p>
         </div>
 
@@ -218,13 +213,6 @@ export default function App() {
           </p>
         </div>
       </footer>
-
-      {/* QR Code Modal: Displays directly on screen without leaving page */}
-      <QRCodeModal
-        isOpen={Boolean(selectedTier)}
-        onClose={() => setSelectedTier(null)}
-        tier={selectedTier}
-      />
 
     </div>
   );
